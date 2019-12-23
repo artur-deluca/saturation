@@ -1,0 +1,4 @@
+[submodule "autoencoder"]
+	path = autoencoder
+	url = https://github.com/artur-deluca/autoencoder-keras
+	branch = master
