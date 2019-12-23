@@ -5,6 +5,7 @@ import tensorflow as tf
 from tensorflow.keras.datasets import cifar10
 
 from model import build_model, write_meta, save_model
+from autoencoder.auto_encoder import pretrain_model
 
 
 INPUT_SHAPE = (32, 32, 3)
@@ -17,13 +18,17 @@ if __name__ == "__main__":
     parser.add_argument("--layers", "-nl", default=5, type=int, help="Number of layers")
     parser.add_argument("--act_fn", "-a", default="sigmoid", type=str, help="Activation function")
     parser.add_argument("--kernel", "-ki", default=None, type=str, help="Kernel initializer")
-    parser.add_argument("--bias", "-bi", default=None, type=str, help="Bias initializer")
+    parser.add_argument("--bias", "-bi", default="zeros", type=str, help="Bias initializer")
     parser.add_argument("--epochs", "-e", default=140, type=int, help="Number of epochs to train model")
     parser.add_argument("--batch_size", "-b", default=10, type=int, help="Batch size for training")
     parser.add_argument("--opt", "-o", default="sgd", type=str, help="Optimizing algorithm")
     parser.add_argument("--loss", "-l", default="sparse_categorical_crossentropy", type=str, help="Loss function")
     parser.add_argument("--val", "-v", default=.3, type=float, help="Validation set size")
     parser.add_argument("--seed", "-s", default=42, type=float, help="Random seed generator")
+
+    parser.add_argument('--pretrain', dest='pretrain', action='store_true')
+    parser.add_argument('--no-pretrain', dest='pretrain', action='store_false')
+    parser.set_defaults(pretrain=False)
 
     args = parser.parse_args()
     name = args.act_fn + str(args.layers) + args.kernel + str(datetime.datetime.now())
@@ -52,6 +57,9 @@ if __name__ == "__main__":
     ]
 
     model.compile(optimizer=args.opt, loss=args.loss, metrics=["accuracy"])
+
+    if args.pretrain:
+        model = pretrain_model(model, INPUT_SHAPE, args.opt, X_train[:500], args.act_fn)
 
     model.fit(X_train, y_train, batch_size=args.batch_size, epochs=args.epochs, validation_data=(X_test, y_test), callbacks=callbacks, use_multiprocessing=True)
 
