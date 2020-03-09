@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0, '')
+sys.path.insert(0, "")
 
 import os
 import tensorflow as tf
@@ -8,8 +8,8 @@ import utils
 
 tf.random.set_seed(0)
 
-META_PATH = "../meta/sigmoid5RandomUniform2020-03-07 20:06:15.102514.json"
-WEIGHT_PATH = "../weights/140.h5"
+META_PATH = ""
+WEIGHT_PATH = ""
 
 name = META_PATH.rsplit("/", 1)[-1].strip(".json")
 
