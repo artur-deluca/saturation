@@ -2,6 +2,7 @@ import os
 import json
 import tensorflow as tf
 
+from .analysis import build_distribution
 from tensorflow.keras import backend as K
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Flatten, Dense
@@ -146,11 +147,12 @@ def train(model, meta, data):
 
             if step % meta["save"] == 0:
                 build_distribution(model, X_test[:meta["n_examples"]], title="Iteration: {}".format(step), path="./images/{}".format(meta["name"]))
-                write_meta(meta["name"], {**meta, **{"cur_epoch": step}})
+                write_meta({**meta, **{"cur_epoch": step}}, meta["name"])
 
                 model.save_weights("./weights/{}/{}.h5".format(meta["name"], step))
             writer.flush()
 
-    model.save_weights("./weights/{}/{}.h5".format(meta["name"], meta["epochs"]))
+    build_distribution(model, X_test[:meta["n_examples"]], title="Iteration: {}".format(step), path="./images/{}".format(meta["name"]))
+    model.save_weights("./weights/{}/{}.h5".format(meta["name"], step))
     results = model.evaluate(X_test, y_test)
-    write_meta(meta["name"], {**meta, **{"evaluation": list(map(str, results))}})
+    write_meta({**meta, **{"evaluation": list(map(str, results))}}, meta["name"])

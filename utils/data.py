@@ -22,9 +22,9 @@ def get_data(dataset):
         X_test = X_test / 255
         input_shape = (32, 32, 3)
     
-    elif dataset.lower() == "cifar10":
+    elif dataset.lower() == "mnist":
         (X_train, y_train), (X_test, y_test) = mnist.load_data()
-        input_shape = (28, 28, 1)
+        input_shape = (28, 28)
     
     else:
         print("dataset not found!")

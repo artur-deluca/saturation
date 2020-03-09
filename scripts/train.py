@@ -7,7 +7,6 @@ import os
 import tensorflow as tf
 
 import utils
-from autoencoder.auto_encoder import pretrain_model
 
 N_EXAMPLES = 300
 
@@ -21,7 +20,7 @@ if __name__ == "__main__":
         "--act_fn", "-a", default="sigmoid", type=str, help="Activation function"
     )
     parser.add_argument(
-        "--kernel", "-ki", default=None, type=str, help="Kernel initializer"
+        "--kernel", "-ki", default="RandomUniform", type=str, help="Kernel initializer"
     )
     parser.add_argument(
         "--bias", "-bi", default="zeros", type=str, help="Bias initializer"
@@ -57,15 +56,15 @@ if __name__ == "__main__":
 
     meta = args.__dict__
     meta["cur_epoch"] = 0
+    meta["n_examples"] = N_EXAMPLES
     meta["name"] = args.act_fn + str(args.layers) + args.kernel + str(datetime.datetime.now())
-    meta["input_shape"], meta["output"], dataset = utils.get_data(args.dataset)
-    
+    meta["input_shape"], meta["output"], *dataset = utils.get_data(args.dataset)
 
     # build model
     model = utils.build_model(args.layers, args.act_fn, args.kernel, args.bias, meta["input_shape"], meta["output"])
     model.compile(optimizer=args.opt, loss=args.loss, metrics=["accuracy"])
 
     if args.pretrain:
-        model = pretrain_model(model, meta, dataset[0][0][:500], dataset[1][0][:N_EXAMPLES])
+        model = utils.pretrain(model, dataset[0][0][:500], dataset[1][0][:N_EXAMPLES], 100, meta["batch_size"], meta["opt"], meta["name"], utils.build_distribution, 1)
 
     utils.train(model, meta, dataset)
