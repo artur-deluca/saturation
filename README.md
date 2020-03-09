@@ -9,9 +9,9 @@ This repository contains my implementation on the following paper:
 The work discusses the incapability of certain activation functions to work on deep neural networks under certain initialization techniques. As the number of layers increase, a problem known as saturation arises.
 
 Saturation is seen in bounded activation functions, as the weights in certain layers of network push all the activation values (i.e. the output of the activation functions) towards its bounded extremities. Since all the outputs in a certain layer are located in plateaus, learning hardly takes place.
-<center>
+<p align="center">
     <img width="400" src="https://artur-deluca.github.io/post/pretraining/figures/saturation.png"/>
-</center>
+</p>
 
 
 # Experiments
@@ -24,8 +24,8 @@ The following results were obtained by training 5-hidden layer networks with 100
   </tr>
   <tr>
     <th></th>
-    <td>Sigmoid</td>
-    <td>Hyperbolic tangent</td>
+    <td align="center">Sigmoid</td>
+    <td align="center">Hyperbolic tangent</td>
   </tr>
   <tr>
     <td><a href="http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf">LeCun (1998)</a></td>
@@ -56,9 +56,3 @@ More details on the historical perspective of saturation as well as a overview o
 3. Have fun!
 
 P.S.: there are more scripts that this, but these are supplementary. Feel free to use them as well.
-
-<style>
-    td {
-    text-align: center;
-    }
-</style>
