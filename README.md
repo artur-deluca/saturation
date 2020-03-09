@@ -24,17 +24,17 @@ The following results were obtained by training 5-hidden layer networks with 100
   </tr>
   <tr>
     <th></th>
-    <td align="center">Sigmoid</td>
-    <td align="center">Hyperbolic tangent</td>
+    <td>Sigmoid</td>
+    <td>Hyperbolic tangent</td>
   </tr>
   <tr>
     <td><a href="http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf">LeCun (1998)</a></td>
     <td><img src="./docs/imgs/sigmoid_lecun.gif"></td>
-    <td><img src="./docs/imgs/sigmoid_glorot.gif"></td>
+    <td><img src="./docs/imgs/tanh_lecun.gif"></td>
   </tr>
   <tr>
     <td><a href="http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf">Glorot and Bengio (2010)</a></td>
-    <td><img src="./docs/imgs/tanh_lecun.gif"></td>
+    <td><img src="./docs/imgs/sigmoid_glorot.gif"></td>
     <td><img src="./docs/imgs/tanh_glorot.gif"></td>
   </tr>
 </table>
