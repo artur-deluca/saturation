@@ -7,6 +7,10 @@ logs/
 meta/
 models/
 ignore/
+experiments/
+images/
+weights/
+act_values.py
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
