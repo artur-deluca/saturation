@@ -11,7 +11,6 @@ def get_dae(inputs):
     return dae
 
 def pretrain(model, X_train, X_test, epochs, batch_size, opt, name, fn, save):
-    os.makedirs("./weights/{}/".format(name+"_pretrain"), exist_ok=True)
     writer = tf.summary.create_file_writer("logs/{}/".format(name))
     step = 0
     for i in range(1, len(model.layers)):
@@ -42,7 +41,7 @@ def pretrain(model, X_train, X_test, epochs, batch_size, opt, name, fn, save):
             for key, value in log.history.items():
                 tf.summary.scalar(key, value[0], step=step)
 
-            if i % save == 0:
+            if step % 5 == 0:
                 model.layers[i].set_weights(dae.layers[0].get_weights())
                 model.layers[i].trainable = False
                 fn(model, X_test, title="Pretrain: {}".format(step), path="./images/{}".format(name))

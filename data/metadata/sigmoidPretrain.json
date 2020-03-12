@@ -1,0 +1,1 @@
+{"layers": 5, "act_fn": "sigmoid", "kernel": "RandomUniform", "bias": "zeros", "epochs": 140, "batch_size": 10, "opt": "sgd", "loss": "sparse_categorical_crossentropy", "dataset": "cifar10", "save": 1, "pretrain": true, "cur_epoch": 43, "n_examples": 300, "name": "sigmoid5RandomUniform2020-03-12 11:17:33.723298", "input_shape": [32, 32, 3], "output": 10}

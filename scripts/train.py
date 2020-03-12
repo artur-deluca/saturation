@@ -66,5 +66,5 @@ if __name__ == "__main__":
 
     if args.pretrain:
         model = utils.pretrain(model, dataset[0][0][:500], dataset[1][0][:N_EXAMPLES], 100, meta["batch_size"], meta["opt"], meta["name"], utils.build_distribution, 1)
-
     utils.train(model, meta, dataset)
+    utils.create_gif("./images/{}".format(meta["name"]))

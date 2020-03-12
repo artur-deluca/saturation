@@ -3,13 +3,8 @@
 # Edit at https://www.gitignore.io/?templates=python
 
 .vscode/
-logs/
-meta/
-models/
-ignore/
-experiments/
-images/
-weights/
+data/imgs
+data/weights
 
 ### Python ###
 # Byte-compiled / optimized / DLL files

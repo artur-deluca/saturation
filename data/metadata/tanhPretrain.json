@@ -1,0 +1,1 @@
+{"layers": 5, "act_fn": "tanh", "kernel": "RandomUniform", "bias": "zeros", "epochs": 140, "batch_size": 10, "opt": "sgd", "loss": "sparse_categorical_crossentropy", "dataset": "cifar10", "save": 1, "pretrain": true, "cur_epoch": 41, "n_examples": 300, "name": "tanh5RandomUniform2020-03-12 11:48:47.165105", "input_shape": [32, 32, 3], "output": 10}
