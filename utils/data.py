@@ -1,5 +1,6 @@
 from tensorflow.keras.datasets import cifar10, mnist
 
+
 def get_data(dataset):
     """
     Fetch and prepare dataset
@@ -21,11 +22,11 @@ def get_data(dataset):
         X_train = X_train / 255
         X_test = X_test / 255
         input_shape = (32, 32, 3)
-    
+
     elif dataset.lower() == "mnist":
         (X_train, y_train), (X_test, y_test) = mnist.load_data()
         input_shape = (28, 28)
-    
+
     else:
         print("dataset not found!")
         return

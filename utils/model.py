@@ -112,7 +112,12 @@ def reinitialize_model(meta_path, weight_path=None, return_meta=False):
         meta = json.load(f)
 
     model = build_model(
-        meta["layers"], meta["act_fn"], meta["kernel"], meta["bias"], meta["input_shape"], meta["output"]
+        meta["layers"],
+        meta["act_fn"],
+        meta["kernel"],
+        meta["bias"],
+        meta["input_shape"],
+        meta["output"],
     )
     model.compile(optimizer=meta["opt"], loss=meta["loss"], metrics=["accuracy"])
 
@@ -130,9 +135,14 @@ def train(model, meta, data):
     (X_train, y_train), (X_test, y_test) = data
     os.makedirs("./weights/{}/".format(meta["name"]), exist_ok=True)
     writer = tf.summary.create_file_writer("logs/{}/".format(meta["name"]))
-    build_distribution(model, X_test[:meta["n_examples"]], title="Iteration: {}".format(meta["cur_epoch"]), path="./images/{}".format(meta["name"]))
+    build_distribution(
+        model,
+        X_test[: meta["n_examples"]],
+        title="Iteration: {}".format(meta["cur_epoch"]),
+        path="./images/{}".format(meta["name"]),
+    )
     with writer.as_default():
-        for step in range(meta["cur_epoch"]+1, meta["epochs"]):
+        for step in range(meta["cur_epoch"] + 1, meta["epochs"]):
             print("Epoch :{}/{}".format(step, meta["epochs"]))
             log = model.fit(
                 X_train,
@@ -146,13 +156,23 @@ def train(model, meta, data):
                 tf.summary.scalar(key, value[0], step=step)
 
             if step % meta["save"] == 0:
-                build_distribution(model, X_test[:meta["n_examples"]], title="Iteration: {}".format(step), path="./images/{}".format(meta["name"]))
+                build_distribution(
+                    model,
+                    X_test[: meta["n_examples"]],
+                    title="Iteration: {}".format(step),
+                    path="./images/{}".format(meta["name"]),
+                )
                 write_meta({**meta, **{"cur_epoch": step}}, meta["name"])
                 model.save_weights("./weights/{}.h5".format(meta["name"]))
 
             writer.flush()
 
-    build_distribution(model, X_test[:meta["n_examples"]], title="Iteration: {}".format(step+1), path="./images/{}".format(meta["name"]))
+    build_distribution(
+        model,
+        X_test[: meta["n_examples"]],
+        title="Iteration: {}".format(step + 1),
+        path="./images/{}".format(meta["name"]),
+    )
     model.save_weights("./weights/{}.h5".format(meta["name"]))
     results = model.evaluate(X_test, y_test)
     write_meta({**meta, **{"evaluation": list(map(str, results))}}, meta["name"])

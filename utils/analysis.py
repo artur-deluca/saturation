@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 
 from tensorflow.keras import Model
 
+
 def build_distribution(model, X_test, title="", path=None):
 
     activation = Model(

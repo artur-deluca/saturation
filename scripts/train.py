@@ -1,4 +1,5 @@
 import sys
+
 sys.path.insert(0, "")
 
 import argparse
@@ -41,9 +42,7 @@ if __name__ == "__main__":
         type=str,
         help="Loss function",
     )
-    parser.add_argument(
-        "--dataset", "-d", default="cifar10", type=str, help="Dataset"
-    )
+    parser.add_argument("--dataset", "-d", default="cifar10", type=str, help="Dataset")
     parser.add_argument(
         "--save", "-sv", default=10, type=int, help="Save every X iterations"
     )
@@ -57,14 +56,33 @@ if __name__ == "__main__":
     meta = args.__dict__
     meta["cur_epoch"] = 0
     meta["n_examples"] = N_EXAMPLES
-    meta["name"] = args.act_fn + str(args.layers) + args.kernel + str(datetime.datetime.now())
+    meta["name"] = (
+        args.act_fn + str(args.layers) + args.kernel + str(datetime.datetime.now())
+    )
     meta["input_shape"], meta["output"], *dataset = utils.get_data(args.dataset)
 
     # build model
-    model = utils.build_model(args.layers, args.act_fn, args.kernel, args.bias, meta["input_shape"], meta["output"])
+    model = utils.build_model(
+        args.layers,
+        args.act_fn,
+        args.kernel,
+        args.bias,
+        meta["input_shape"],
+        meta["output"],
+    )
     model.compile(optimizer=args.opt, loss=args.loss, metrics=["accuracy"])
 
     if args.pretrain:
-        model = utils.pretrain(model, dataset[0][0][:500], dataset[1][0][:N_EXAMPLES], 100, meta["batch_size"], meta["opt"], meta["name"], utils.build_distribution, 1)
+        model = utils.pretrain(
+            model,
+            dataset[0][0][:500],
+            dataset[1][0][:N_EXAMPLES],
+            100,
+            meta["batch_size"],
+            meta["opt"],
+            meta["name"],
+            utils.build_distribution,
+            1,
+        )
     utils.train(model, meta, dataset)
     utils.create_gif("./images/{}".format(meta["name"]))
