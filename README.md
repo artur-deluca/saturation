@@ -12,7 +12,7 @@ Saturation is seen in bounded activation functions, as the weights in certain la
 <p align="center">
     <img width="49%" src="docs/imgs/saturation.png"/>
     <img width="49%" src="docs/imgs/saturation_derivative.svg"/><br>
-    The saturation regions of the sigmoid (left) and its derivative (right)
+    <sub>The saturation regions of the sigmoid (left) and its derivative (right)</sub>
 </p>
 Saturation in activation functions such as the sigmoid and the hyperbolic tangent also present another predicament in gradient-based learning.Since the aforementioned functions have symmetric derivatives around zero, as the observations migrate to the functions' extremes, their corresponding values in the derivative of activation function tend to zero. This in turn makes it harder for the system to steer towards optimal solutions as the parameter updates get smaller.
 
@@ -68,7 +68,7 @@ However, the results of the hyperbolic tangent function have shown to deviate fr
 <p align="center">
     <img width="60%" src="docs/imgs/results_paper.png"/>
     <br>
-    Activation values of the hyperbolic tangent during initialization using <a href="http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf">Lecun (1998)</a> (top) and the proposed technique (below). Source: <a href="http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf">Glorot and Bengio (2010)</a>
+    <sub>Activation values of the hyperbolic tangent during initialization using <a href="http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf">Lecun (1998)</a> (top) and the proposed technique (below). Source: <a href="http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf">Glorot and Bengio (2010)</a></sub>
 </p>
 
 Furthermore, contrasting with the original work, the replicated activation values using the CIFAR-10 dataset have not shown any qualitative differences between the then go-to and the proposed initialization.
@@ -76,7 +76,7 @@ Furthermore, contrasting with the original work, the replicated activation value
 <p align="center">
     <img width="49%" src="docs/imgs/tanh_glorot_initial.png"/>
     <img width="49%" src="docs/imgs/tanh_lecun_initial.png"/>
-    Activation values across two different initialization techniques: Lecun (1998) on the left and Glorot and Bengio (2010) on the right
+    <sub>Activation values across two different initialization techniques: Lecun (1998) on the left and Glorot and Bengio (2010) on the right</sub>
       
 </p>
 
@@ -88,7 +88,7 @@ Besides the aforementioned techniques, the same analysis was performed on a netw
     <img width="49%" src="docs/imgs/sigmoid_pretrain.gif"/>
     <img width="49%" src="docs/imgs/tanh_pretrain.gif"/>
     <br>
-    Activation values using unsupervised pretraining: sigmoid on the left and tanh on the right.
+    <sub>Activation values using unsupervised pretraining: sigmoid on the left and tanh on the right.</sub>
 </p>
 
 Here we notice that the early stages of training slowly push the activation values towards the extremities. Despite not having a great effect on the sigmoid, which after the process demonstrated a similar behavior, the unsupervised pretraining caused a great change in the hyperbolic tangent setting. Instead of continuing to spike around the extremities, the last layer of the network has settled in zero, a quite unstable point for the activation function. We conjecture that this behavior can be explained as the authors have done for the sigmoid: the high peak in the last layer on zero is an attempt to suppress useless information from previous layers.
@@ -99,7 +99,7 @@ In order to verify if the assumptions made by authors would hold during training
     <img width="32%" src="docs/imgs/tanh_lecun.svg"/>
     <img width="32%" src="docs/imgs/tanh_glorot.svg"/>
     <img width="32%" src="docs/imgs/tanh_pretrain.svg"/>
-    Variance of activation values across three different initialization techniques. From left to right: <a href="http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf">LeCun (1998)</a>, <a href="http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf">Glorot and Bengio (2010)</a> and <a href="https://www.cs.toronto.edu/~larocheh/publications/icml-2008-denoising-autoencoders.pdf">Vincent et al. (2008)</a>
+    <sub>Variance of activation values across three different initialization techniques. From left to right: <a href="http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf">LeCun (1998)</a>, <a href="http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf">Glorot and Bengio (2010)</a> and <a href="https://www.cs.toronto.edu/~larocheh/publications/icml-2008-denoising-autoencoders.pdf">Vincent et al. (2008)</a></sub>
 </p>
 
 Here we noticed that the first and second results do not vary greatly. This by itself does not mean that the assumptions do not hold. However, when analyzing the behavior of the curves, we notice the abrupt growth in the early stages of training, which is later bounded by the function range. Despite "stabilizing" in later stages of training, this more likely has to do with the restrictions of the activation function, rather than the well-behaved, expected, performance.
