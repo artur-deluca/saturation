@@ -22,7 +22,6 @@ Traditionally, the weights of neural networks were initialized according to a te
   <img src="docs/imgs/lecun.gif"/>,
 </p>
 
-
 parametrized by <b>n</b>, the number of incoming connections to the linked node.
 
 However, in settings with a great number of layers, saturation often took place. In 2006, a research direction brought forward by [Hinton et. al (2006)](https://www.mitpressjournals.org/doi/10.1162/neco.2006.18.7.1527), allowed for the training of deep neural networks using unsupervised pretraining, which yielded starting points that prevented this issue.
