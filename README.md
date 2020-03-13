@@ -10,13 +10,11 @@ The work discusses the incapability of certain activation functions to work on d
 
 Saturation is seen in bounded activation functions, as the weights in certain layers of network push all the activation values (i.e. the output of the activation functions) towards its bounded extremities. Since all the outputs in a certain layer are located in plateaus, it is challenging to distinguish observations, thus learning hardly takes place.
 <p align="center">
-    <img width="60%" src="docs/imgs/saturation.png"/>
+    <img width="49%" src="docs/imgs/saturation.png"/>
+    <img width="49%" src="docs/imgs/saturation_derivative.svg"/><br>
+    The saturation regions of the sigmoid (left) and its derivative (right)
 </p>
-Saturation in activation functions such as the sigmoid and the hyperbolic tangent also present another predicament in gradient-based learning.
-<p align="center">
-    <img width="60%" src="docs/imgs/saturation_derivative.svg"/>
-</p>
-Since the aforementioned functions have symmetric derivatives around zero, as the observations migrate to the functions' extremes, their corresponding values in the derivative of activation function tend to zero. This in turn makes it harder for the system to steer towards optimal solutions as the parameter updates get smaller.
+Saturation in activation functions such as the sigmoid and the hyperbolic tangent also present another predicament in gradient-based learning.Since the aforementioned functions have symmetric derivatives around zero, as the observations migrate to the functions' extremes, their corresponding values in the derivative of activation function tend to zero. This in turn makes it harder for the system to steer towards optimal solutions as the parameter updates get smaller.
 
 Traditionally, the weights of neural networks were initialized according to a technique popularized by Lecun (1998), which consists of sampling the weights from a bounded uniform distribution,
 
